@@ -79,7 +79,7 @@
     </div>
 </div>
 
-@push('script')
+@push('scripts')
 <script>
     document.addEventListener('livewire:load', function () {
         @this.on('deleteProduct', idProduct => {
