@@ -98,7 +98,7 @@
                 </tfoot>
             </table>
             <div class="">
-                <button class="btn btn-success btn-sm float-right">Submit</button>
+                <button type="button" wire:click="save" class="btn btn-success btn-sm float-right">Submit</button>
             </div>
         </div>
     </div>

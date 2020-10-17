@@ -28,5 +28,7 @@ Route::group(['middleware' =>['auth:sanctum', 'verified']], function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
     Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi');
     Route::get('/kasir', [KasirController::class, 'index'])->name('kasir');
+    Route::get('/invoice/{no_order}', [KasirController::class, 'invoice'])->name('invoice');
+    Route::get('/struk/{no_order}', [KasirController::class, 'struk'])->name('struk');
 
 });

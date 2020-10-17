@@ -5,6 +5,8 @@ namespace App\Http\Livewire\Kasir;
 use Livewire\Component;
 use App\Models\Product;
 use App\Models\Transaction;
+use App\Models\Order;
+use App\Models\OrderProduct;
 
 
 class Index extends Component
@@ -63,6 +65,39 @@ class Index extends Component
         $transaction = Transaction::find($id);
         $transaction->delete();
         session()->flash('message', 'Transaction berhasil di hapus');
+    }
+
+    public function save()
+    {
+        // dd($this->pembayaran);
+        $transaction = Transaction::get();
+
+        $order = Order::create([
+            'no_order' => 'OD-'.date('Ymd').rand(1111,9999),
+            'nama_kasir' => auth()->user()->name,
+            'grand_total' => $transaction->sum('total'),
+            'pembayaran' => $this->pembayaran,
+            'kembalian' => $this->pembayaran-$transaction->sum('total')
+        ]);
+
+
+        foreach ($transaction as $key => $value) {
+            $product = array(
+                'order_id' => $order->id,
+                'product_id' => $value->product_id,
+                'qty' => $value->qty,
+                'total' => $value->total,
+                'created_at' => \Carbon\carbon::now(),
+                'updated_at' => \Carbon\carbon::now()
+            );
+
+            $orderProduct = OrderProduct::insert($product);
+
+            $deleteTransaction = Transaction::where('id', $value->id)->delete();
+        }
+
+        // session()->flash('message', 'Transaction berhasil disimpan');
+        return redirect()->to('/invoice/'.$order->no_order);
     }
 
     public function render()
