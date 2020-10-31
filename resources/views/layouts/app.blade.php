@@ -50,6 +50,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.3.5/sweetalert2.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
         @stack('modals')
         @livewireScripts

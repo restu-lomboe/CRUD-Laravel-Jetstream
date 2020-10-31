@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\KasirController;
+use App\Http\Controllers\ChartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,5 +31,8 @@ Route::group(['middleware' =>['auth:sanctum', 'verified']], function () {
     Route::get('/kasir', [KasirController::class, 'index'])->name('kasir');
     Route::get('/invoice/{no_order}', [KasirController::class, 'invoice'])->name('invoice');
     Route::get('/struk/{no_order}', [KasirController::class, 'struk'])->name('struk');
+
+    //charts controller
+    Route::get('/charts', [ChartController::class, 'index'])->name('charts');
 
 });
